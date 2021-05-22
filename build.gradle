@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        maven { url 'https://repo.spring.io/plugins-snapshot' }
+    }
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE'
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'scala'
+
+    group 'com.lstrihic'
+    version '1.0-SNAPSHOT'
+
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    repositories {
+        // https://search.maven.org
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.scala-lang:scala-library:2.13.6'
+        implementation 'org.clapper:grizzled-scala_2.13'
+        implementation 'org.slf4j:slf4j-api'
+        implementation 'ch.qos.logback:logback-classic'
+
+        testImplementation 'org.scalatest:scalatest'
+        testImplementation 'junit:junit'
+    }
+}
+
+apply from: "dependencies.gradle"

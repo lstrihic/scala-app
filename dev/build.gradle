@@ -1,0 +1,5 @@
+dependencies {
+    compile files("conf")
+
+    compile project(':core:server')
+}
