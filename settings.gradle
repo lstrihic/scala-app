@@ -1,7 +1,8 @@
-rootProject.name = 'akka'
+rootProject.name = 'app'
 
 include(
     'core:server',
     'core:config',
+    'core:test',
     'dev'
 )

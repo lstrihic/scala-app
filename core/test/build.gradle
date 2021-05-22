@@ -1,0 +1,6 @@
+dependencies {
+    implementation 'org.scalatest:scalatest_2.13'
+    implementation 'org.mockito:mockito-scala_2.13'
+    implementation 'org.scalatestplus:junit-4-13_2.13'
+    implementation 'junit:junit'
+}

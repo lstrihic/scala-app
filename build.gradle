@@ -24,12 +24,9 @@ subprojects {
 
     dependencies {
         implementation 'org.scala-lang:scala-library:2.13.6'
-        implementation 'org.clapper:grizzled-scala_2.13'
+        implementation 'org.clapper:grizzled-slf4j_2.13'
         implementation 'org.slf4j:slf4j-api'
         implementation 'ch.qos.logback:logback-classic'
-
-        testImplementation 'org.scalatest:scalatest'
-        testImplementation 'junit:junit'
     }
 }
 

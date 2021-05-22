@@ -1,3 +1,6 @@
 dependencies {
     implementation 'com.typesafe:config'
+
+    testImplementation project(':core:test')
+    testImplementation 'org.scalatestplus:junit-4-13_3'
 }

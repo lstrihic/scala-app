@@ -19,16 +19,16 @@ class AppConfig(configFile: String) {
   }
 
   object database {
-    lazy val dbDriverClassname: String = appConfig.getString("database.connection.db-driver-classname")
-    lazy val dbUrl: String = appConfig.getString("database.connection.db-url")
-    lazy val dbUsername: String = appConfig.getString("database.connection.db-username")
-    lazy val dbPassword: String = appConfig.getString("database.connection.db-password")
-    lazy val poolName: String = appConfig.getString("database.connection.pool-name")
-    lazy val maxPoolSize: Int = appConfig.getInt("database.connection.max-pool-size")
-    lazy val maxLifeTime: Long = appConfig.getLong("database.connection.max-life-time")
-    lazy val idleTimeout: Long = appConfig.getLong("database.connection.idle-timeout")
-    lazy val minimumIdle: Int = appConfig.getInt("database.connection.minimum")
-    lazy val connectionTimeout: Long = appConfig.getLong("database.connection.connection")
-    lazy val leakConnectionThreshold: Long = appConfig.getLong("database.connection.leak-connection-threshold")
+    lazy val dbDriverClassname: String = appConfig.getString("database.db-driver-classname")
+    lazy val dbUrl: String = appConfig.getString("database.db-url")
+    lazy val dbUsername: String = appConfig.getString("database.db-username")
+    lazy val dbPassword: String = appConfig.getString("database.db-password")
+    lazy val poolName: String = appConfig.getString("database.pool-name")
+    lazy val maxPoolSize: Int = appConfig.getInt("database.max-pool-size")
+    lazy val maxLifeTime: Long = appConfig.getLong("database.max-life-time")
+    lazy val idleTimeout: Long = appConfig.getLong("database.idle-timeout")
+    lazy val minimumIdle: Int = appConfig.getInt("database.minimum")
+    lazy val connectionTimeout: Long = appConfig.getLong("database.connection")
+    lazy val leakConnectionThreshold: Long = appConfig.getLong("database.leak-connection-threshold")
   }
 }
