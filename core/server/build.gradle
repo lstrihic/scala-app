@@ -11,4 +11,8 @@ dependencies {
     implementation 'org.http4s:http4s-jetty_2.13'
     implementation 'org.http4s:http4s-dsl_2.13'
     implementation 'org.http4s:http4s-dropwizard-metrics_2.13'
+
+    implementation 'com.zaxxer:HikariCP'
+    implementation 'org.tpolecat:doobie-core_2.13:1.0.0-M4'
+    implementation 'org.liquibase:liquibase-core:4.3.5'
 }

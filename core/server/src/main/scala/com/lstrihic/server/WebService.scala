@@ -17,9 +17,9 @@ class WebService[F[_] : Async] extends Http4sDsl[F] {
 
   private def rootRoutes: HttpRoutes[F] = HttpRoutes.of[F] {
     case GET -> Root => Ok("Home endpoint")
-    case _ -> Root => MethodNotAllowed(Allow(GET))
     case req@GET -> Root / "ip" => Ok(
       Json.obj("ip" -> Json.fromString(req.remoteAddr.fold("unknown")(_.toString)))
     )
+    case _ -> Root => MethodNotAllowed(Allow(GET))
   }
 }

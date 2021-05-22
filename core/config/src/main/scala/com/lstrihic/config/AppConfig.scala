@@ -25,10 +25,9 @@ class AppConfig(configFile: String) {
     lazy val dbPassword: String = appConfig.getString("database.db-password")
     lazy val poolName: String = appConfig.getString("database.pool-name")
     lazy val maxPoolSize: Int = appConfig.getInt("database.max-pool-size")
-    lazy val maxLifeTime: Long = appConfig.getLong("database.max-life-time")
-    lazy val idleTimeout: Long = appConfig.getLong("database.idle-timeout")
-    lazy val minimumIdle: Int = appConfig.getInt("database.minimum")
-    lazy val connectionTimeout: Long = appConfig.getLong("database.connection")
-    lazy val leakConnectionThreshold: Long = appConfig.getLong("database.leak-connection-threshold")
+
+    object migration {
+      lazy val changeSet: String = appConfig.getString("database.migration.change-set")
+    }
   }
 }
