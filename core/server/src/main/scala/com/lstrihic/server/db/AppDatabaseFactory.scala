@@ -13,17 +13,25 @@ import liquibase.resource.ClassLoaderResourceAccessor
 import javax.sql.DataSource
 
 object AppDatabaseFactory {
-  def createDoobieTransactor[F[_] : Async](config: AppConfig, dataSource: DataSource): Resource[F, Transactor[F]] = for {
-    ce <- ExecutionContexts.fixedThreadPool[F](config.database.maxPoolSize)
-  } yield Transactor.fromDataSource(dataSource, ce)
 
-  def migrate[F[_] : Async](config: AppConfig, dataSource: DataSource): Resource[F, Unit] = {
+  def createDB[F[_] : Async](config: AppConfig): Resource[F, Transactor[F]] = for {
+    datasource <- crateDataSource(config)
+    _ = System.setProperty("liquibase.hub.mode", "off")
+    _ <- migrate(config, datasource)
+    xa <- createDoobieTransactor(config, datasource)
+  } yield xa
+
+  private def createDoobieTransactor[F[_] : Async](config: AppConfig, dataSource: DataSource): Resource[F, Transactor[F]] = for {
+    ec <- ExecutionContexts.fixedThreadPool[F](config.database.maxPoolSize)
+  } yield Transactor.fromDataSource[F](dataSource, ec)
+
+  private def migrate[F[_] : Async](config: AppConfig, dataSource: DataSource): Resource[F, Unit] = {
     val database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(dataSource.getConnection))
     val liquibase = new Liquibase(config.database.migration.changeSet, new ClassLoaderResourceAccessor(), database)
     Resource.eval(Async[F].delay(liquibase.update("")))
   }
 
-  def crateDataSource[F[_] : Async](config: AppConfig): Resource[F, HikariDataSource] = {
+  private def crateDataSource[F[_] : Async](config: AppConfig): Resource[F, HikariDataSource] = {
     val hikariDataSource = new HikariDataSource
     hikariDataSource.setJdbcUrl(config.database.dbUrl)
     hikariDataSource.setDriverClassName(config.database.dbDriverClassname)

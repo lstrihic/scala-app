@@ -3,7 +3,7 @@ package com.lstrihic.config
 import com.typesafe.config.{Config, ConfigFactory}
 
 object AppConfig {
-  private lazy val defaultConfig = apply("app.config")
+  private lazy val defaultConfig = apply("app.conf")
 
   def apply(configName: String) = new AppConfig(configName)
 

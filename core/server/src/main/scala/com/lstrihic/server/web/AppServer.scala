@@ -1,15 +1,13 @@
-package com.lstrihic.server
+package com.lstrihic.server.web
 
-
-import cats.effect._
+import cats.effect.{Async, Resource}
 import com.codahale.metrics.MetricRegistry
 import com.lstrihic.config.AppConfig
 import org.http4s.HttpRoutes
-import org.http4s.metrics.dropwizard._
-import org.http4s.server.{HttpMiddleware, Server}
+import org.http4s.metrics.dropwizard.{Dropwizard, metricsService}
+import org.http4s.server.Server
 import org.http4s.server.jetty.JettyBuilder
 import org.http4s.server.middleware.Metrics
-
 
 object AppServer {
   private def builder[F[_] : Async]: JettyBuilder[F] = {
@@ -22,5 +20,5 @@ object AppServer {
       .mountService(metricsService(metricsRegistry), "/metrics")
   }
 
-  def resource[F[_]: Async]: Resource[F, Server] = builder[F].resource
+  def resource[F[_] : Async]: Resource[F, Server] = builder[F].resource
 }

@@ -1,4 +1,4 @@
-package com.lstrihic.server
+package com.lstrihic.server.web
 
 import cats.effect._
 import io.circe.Json

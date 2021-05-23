@@ -9,6 +9,7 @@ subprojects {
             dependency 'ch.qos.logback:logback-classic:1.2.3'
             dependency 'com.zaxxer:HikariCP:4.0.3'
             dependency 'org.liquibase:liquibase-core:4.3.5'
+            dependency 'com.mattbertolini:liquibase-slf4j:4.0.0'
 
             dependency 'com.typesafe:config:1.4.1'
             dependencySet(group:'org.http4s', version: '1.0.0-M21') {
@@ -24,6 +25,9 @@ subprojects {
                 entry 'fs2-core_2.13'
                 entry 'fs2-io_2.13'
                 entry 'fs2-reactive-streams_2.13'
+            }
+            dependencySet(group:'org.tpolecat', version: '1.0.0-M4') {
+                entry 'doobie-core_2.13'
             }
 
             // test dependencies
